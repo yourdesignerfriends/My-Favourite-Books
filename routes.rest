@@ -1,0 +1,36 @@
+### Get all books
+GET http://localhost:3000/books
+
+### Get one book (Don Quijote)
+GET http://localhost:3000/books/6a1127d9e97c81248902b299
+
+### Create book
+POST http://localhost:3000/books HTTP/1.1
+content-type: application/json
+
+{
+  "title": "Don Quijote de la Mancha",
+  "author": "Miguel de Cervantes",
+  "genre": "Classic",
+  "yearPublished": 1605,
+  "summary": "A nobleman becomes a knight-errant and embarks on humorous adventures.",
+  "editorial": "Francisco de Robles",
+  "numberOfPages": 863
+}
+
+### PUT book (update Don Quijote)
+PUT http://localhost:3000/books/6a1127d9e97c81248902b299 HTTP/1.1
+content-type: application/json
+
+{
+  "title": "Don Quijote de la Mancha (Updated)",
+  "author": "Miguel de Cervantes",
+  "genre": "Classic",
+  "yearPublished": 1605,
+  "summary": "Updated summary for testing.",
+  "editorial": "Francisco de Robles",
+  "numberOfPages": 863
+}
+
+### DELETE book (Don Quijote)
+DELETE http://localhost:3000/books/6a1127d9e97c81248902b299

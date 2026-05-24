@@ -1,0 +1,29 @@
+{
+  "name": "my-favourite-books",
+  "version": "1.0.0",
+  "description": "My Favourite Books API",
+  "homepage": "https://github.com/yourdesignerfriends/My-Favourite-Books#readme",
+  "bugs": {
+    "url": "https://github.com/yourdesignerfriends/My-Favourite-Books/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourdesignerfriends/My-Favourite-Books.git"
+  },
+  "license": "ISC",
+  "author": "Analina Nielsen",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongodb": "^7.2.0",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.1",
+    "validatorjs": "^3.22.1"
+  }
+}
