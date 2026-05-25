@@ -8,7 +8,7 @@ const port = process.env.PORT || 3000;
 // Body parser to read JSON
 app.use(bodyParser.json());
 
-app.use((req, res, next) => {
+app.use((_req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader(
         'Access-Control-Allow-Headers',
@@ -22,6 +22,23 @@ app.use((req, res, next) => {
 });
 
 app.use('/', require('./routes'));
+
+// I use this global error handler to catch any errors passed with next(err)
+// so the API always returns a clean and consistent JSON response.
+// This handler automatically returns a 500 Internal Server Error in the following cases:
+// - If I don't define err.status, Express defaults to 500.
+// - If MongoDB fails during a database operation.
+// - If any internal logic in my controller throws an unexpected error.
+// - If an unexpected exception occurs anywhere in the request pipeline.
+// - If I call next(err) without specifying a status code.
+// I need to declare these parameters _req and _next because Express requires them, even though I don't use them directly.
+app.use((err, _req, res, _next) => {
+    console.error(err);
+
+    res.status(err.status || 500).json({
+        message: err.message || "Internal Server Error"
+    });
+});
 
 mongodb.initDb((err) => {
     if(err) {

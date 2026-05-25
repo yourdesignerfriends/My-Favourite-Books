@@ -13,17 +13,23 @@ const ObjectId = require('mongodb').ObjectId;
 const getAllBooks = async (req, res, next) => {
     //#swagger.tags=['Books']
     try {
+        // I connect to the database and access the 'books' collection.
+        // Here I use .find() without filters because I want to retrieve
+        // every book stored in the collection.
         const result = await mongodb
             .getDatabase()
             .db()
             .collection('books')
             .find();
-
+        // I convert the cursor into an array so I can send the data
+        // as a clean JSON response to the client.
         result.toArray()
             .then((books) => {
                 res.setHeader('Content-Type', 'application/json');
+                // I return all books with status 200.
                 res.status(200).json(books);
             })
+            // If something goes wrong, I pass the error to the handler.
             .catch((err) => next(err));
 
     } catch (err) {
