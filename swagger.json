@@ -5,7 +5,7 @@
     "description": "API for managing books",
     "version": "1.0.0"
   },
-  "host": "my-favourite-books.onrender.com",
+   "host": "my-favourite-books.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"

@@ -9,7 +9,7 @@ const saveAuthor = (req, res, next) => {
         birthMonth: 'required|string',
         religion: 'string',
         writingStyle: 'required|string',
-        notableWorks: 'array'
+        notableWorks: 'string'
     };
 
     validator(req.body, validationRule, {}, (err, status) => {

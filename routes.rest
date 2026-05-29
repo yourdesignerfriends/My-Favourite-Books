@@ -2,7 +2,7 @@
 GET http://localhost:3000/books
 
 ### Get one book (Don Quijote)
-GET http://localhost:3000/books/6a1127d9e97c81248902b299
+GET http://localhost:3000/books/6a19ba5e17984294347b45ff
 
 ### Create book
 POST http://localhost:3000/books HTTP/1.1
@@ -19,7 +19,7 @@ content-type: application/json
 }
 
 ### PUT book (update Don Quijote)
-PUT http://localhost:3000/books/6a1127d9e97c81248902b299 HTTP/1.1
+PUT http://localhost:3000/books/6a19ba5e17984294347b45ff HTTP/1.1
 content-type: application/json
 
 {
@@ -33,7 +33,7 @@ content-type: application/json
 }
 
 ### DELETE book (Don Quijote)
-DELETE http://localhost:3000/books/6a1127d9e97c81248902b299
+DELETE http://localhost:3000/books/6a19ba5e17984294347b45ff
 
 ###############################################################
 # AUTHORS SECTION
@@ -43,7 +43,7 @@ DELETE http://localhost:3000/books/6a1127d9e97c81248902b299
 GET http://localhost:3000/authors
 
 ### Get one author
-GET http://localhost:3000/authors/6a18f0215508ef98a8aa40ce
+GET http://localhost:3000/authors/6a19ba7e17984294347b4600
 
 ### Create author
 POST http://localhost:3000/authors HTTP/1.1
@@ -56,11 +56,11 @@ content-type: application/json
   "birthMonth": "September",
   "religion": "Catholic",
   "writingStyle": "Classic Spanish literature",
-  "notableWorks": ["Don Quijote de la Mancha", "La Galatea"]
+  "notableWorks": "Don Quijote de la Mancha, La Galatea"
 }
 
 ### PUT author (update Cervantes)
-PUT http://localhost:3000/authors/6a18f0215508ef98a8aa40ce HTTP/1.1
+PUT http://localhost:3000/authors/6a19ba7e17984294347b4600 HTTP/1.1
 content-type: application/json
 
 {
@@ -70,8 +70,8 @@ content-type: application/json
   "birthMonth": "September",
   "religion": "Catholic",
   "writingStyle": "Classic Spanish literature",
-  "notableWorks": ["Don Quijote de la Mancha", "La Galatea"]
+  "notableWorks": "Don Quijote de la Mancha, La Galatea"
 }
 
 ### DELETE author
-DELETE http://localhost:3000/authors/6a18f0215508ef98a8aa40ce
+DELETE http://localhost:3000/authors/6a19ba7e17984294347b4600
