@@ -23,6 +23,21 @@ app.use((_req, res, next) => {
 
 app.use('/', require('./routes'));
 
+/* *******************************
+ * Intentional Error Route
+ ******************************* */
+app.get('/error', (req, res, next) => {
+    // I intentionally throw an error to demonstrate how my global error handler works.
+    next(new Error("Intentional server crash for testing purposes"));
+});
+
+/* *******************************
+ * File Not Found Route (404)
+ ******************************* */
+app.use((req, res, next) => {
+    next({ status: 404, message: "Sorry, we couldn't find that page." });
+});
+
 // I use this global error handler to catch any errors passed with next(err)
 // so the API always returns a clean and consistent JSON response.
 // This handler automatically returns a 500 Internal Server Error in the following cases:

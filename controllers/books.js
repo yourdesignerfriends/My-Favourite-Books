@@ -21,22 +21,17 @@ const getAllBooks = async (req, res, next) => {
             .db()
             .collection('books')
             .find();
-        // I convert the cursor into an array so I can send the data
-        // as a clean JSON response to the client.
-        result.toArray()
-            .then((books) => {
-                res.setHeader('Content-Type', 'application/json');
-                // I return all books with status 200.
-                res.status(200).json(books);
-            })
-            // If something goes wrong, I pass the error to the handler.
-            .catch((err) => next(err));
+
+            const books = await result.toArray();
+
+            // I return all books with status 200.
+            res.status(200).json(books);
 
     } catch (err) {
+        // I pass any unexpected server error to the global 500 handler.
         next(err);
     }
 };
-
 
 /* ============================================================
    GET SINGLE BOOK
@@ -51,28 +46,25 @@ const getSingleBook = async (req, res, next) => {
 
         const bookId = new ObjectId(req.params.id);
 
+        // I query the database for a single book using the validated ID.
         const result = await mongodb
             .getDatabase()
             .db()
             .collection('books')
-            .find({ _id: bookId });
+            .findOne({ _id: bookId });
 
-        result.toArray()
-            .then((books) => {
-                if (!books[0]) {
-                    return res.status(404).json({ message: "Book not found" });
-                }
-
-                res.setHeader('Content-Type', 'application/json');
-                res.status(200).json(books[0]);
-            })
-            .catch((err) => next(err));
+            // If no book is found, I return a 404 Not Found.
+            if (!result) {
+                return res.status(404).json({ message: "Book not found" });
+            }
+            // I return the found book with status 200.  
+            res.status(200).json(result);
 
     } catch (err) {
+        // I pass unexpected errors to the global 500 handler.
         next(err);
     }
 };
-
 
 /* ============================================================
    CREATE BOOK
@@ -144,19 +136,23 @@ const updateBook = async (req, res, next) => {
             .collection('books')
             .replaceOne({ _id: bookId }, book);
 
+        // If no document matched, the book does not exist → 404
+        if (response.matchedCount === 0) {
+            return res.status(404).json({ message: "Book not found" });
+        }
+
+        // If the book was updated successfully → 204
         if (response.modifiedCount > 0) {
             return res.status(204).send();
         }
 
-        return res.status(500).json(
-            response.error || "Some error occurred while updating the book."
-        );
+        // If matched but not modified (same data), still OK → 204
+        return res.status(204).send();
 
     } catch (err) {
         next(err);
     }
 };
-
 
 /* ============================================================
    DELETE BOOK
@@ -177,19 +173,20 @@ const deleteBook = async (req, res, next) => {
             .collection('books')
             .deleteOne({ _id: bookId });
 
+        // I check how many documents were deleted.
+        // If deletedCount is 0, it means the book does not exist, so I return a 404.
+        if (response.deletedCount === 0) {
+            return res.status(404).json({ message: "Book not found" });
+        }
+
         if (response.deletedCount > 0) {
             return res.status(204).send();
         }
-
-        return res.status(500).json(
-            response.error || "Some error occurred while deleting the book."
-        );
 
     } catch (err) {
         next(err);
     }
 };
-
 
 module.exports = {
     getAllBooks,
