@@ -12,4 +12,7 @@ router.get('/', (req, res) => {
 // Books routes
 router.use('/books', require('./books'));
 
+// Authors routes
+router.use('/authors', require('./authors'));
+
 module.exports = router;

@@ -26,7 +26,7 @@ app.use('/', require('./routes'));
 /* *******************************
  * Intentional Error Route
  ******************************* */
-app.get('/error', (req, res, next) => {
+app.get('/error', (_req, _res, next) => {
     // I intentionally throw an error to demonstrate how my global error handler works.
     next(new Error("Intentional server crash for testing purposes"));
 });
@@ -34,7 +34,7 @@ app.get('/error', (req, res, next) => {
 /* *******************************
  * File Not Found Route (404)
  ******************************* */
-app.use((req, res, next) => {
+app.use((_req, _res, next) => {
     next({ status: 404, message: "Sorry, we couldn't find that page." });
 });
 

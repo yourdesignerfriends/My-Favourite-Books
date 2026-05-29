@@ -34,3 +34,44 @@ content-type: application/json
 
 ### DELETE book (Don Quijote)
 DELETE http://localhost:3000/books/6a1127d9e97c81248902b299
+
+###############################################################
+# AUTHORS SECTION
+###############################################################
+
+### Get all authors
+GET http://localhost:3000/authors
+
+### Get one author
+GET http://localhost:3000/authors/6a18f0215508ef98a8aa40ce
+
+### Create author
+POST http://localhost:3000/authors HTTP/1.1
+content-type: application/json
+
+{
+  "fullName": "Miguel de Cervantes",
+  "birthPlace": "Alcalá de Henares, Spain",
+  "birthYear": 1547,
+  "birthMonth": "September",
+  "religion": "Catholic",
+  "writingStyle": "Classic Spanish literature",
+  "notableWorks": ["Don Quijote de la Mancha", "La Galatea"]
+}
+
+### PUT author (update Cervantes)
+PUT http://localhost:3000/authors/6a18f0215508ef98a8aa40ce HTTP/1.1
+content-type: application/json
+
+{
+  "fullName": "Miguel de Cervantes Saavedra",
+  "birthPlace": "Alcalá de Henares, Spain",
+  "birthYear": 1547,
+  "birthMonth": "September",
+  "religion": "Catholic",
+  "writingStyle": "Classic Spanish literature",
+  "notableWorks": ["Don Quijote de la Mancha", "La Galatea"]
+}
+
+### DELETE author
+DELETE http://localhost:3000/authors/6a18f0215508ef98a8aa40ce
