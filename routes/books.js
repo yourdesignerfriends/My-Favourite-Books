@@ -11,12 +11,12 @@ router.get('/', booksController.getAllBooks);
 router.get('/:id', booksController.getSingleBook);
 
 // POST create a new book (with validation middleware)
-router.post('/', saveBook, booksController.createBook);
+router.post('/', isAuthenticated, saveBook, booksController.createBook);
 
 // PUT update a book (with validation middleware)
-router.put('/:id', saveBook, booksController.updateBook);
+router.put('/:id', isAuthenticated, saveBook, booksController.updateBook);
 
 // DELETE remove a book
-router.delete('/:id', booksController.deleteBook);
+router.delete('/:id', isAuthenticated, booksController.deleteBook);
 
 module.exports = router;
