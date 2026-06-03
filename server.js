@@ -23,15 +23,17 @@ app.use(bodyParser.json());
 //     resave: false,
 //     saveUninitialized: true,
 // }));
-app.set('trust proxy', 1);
+const isProduction = process.env.NODE_ENV === "production";
+
+app.set("trust proxy", 1);
 
 app.use(session({
     secret: process.env.SESSION_SECRET || "secret",
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: true,
-        sameSite: "none"
+        secure: isProduction,
+        sameSite: isProduction ? "none" : "lax"
     }
 }));
 
