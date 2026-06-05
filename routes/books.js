@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const { isAuthenticated } = require('../middleware/authenticate');
+
 const booksController = require('../controllers/books');
 const { saveBook } = require('../middleware/validate');
 
